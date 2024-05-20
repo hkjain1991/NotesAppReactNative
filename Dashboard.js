@@ -30,7 +30,13 @@ const Dashboard = ({navigation}) => {
       <Button
         title="Add"
         color="#f194ff"
-        onPress={() => navigation.navigate('NotesEdit', {btnTitle: 'Edit'})}
+        onPress={() =>
+          navigation.navigate('NotesEdit', {
+            btnTitle: 'Save',
+            title: '',
+            descriptionInput: '',
+          })
+        }
       />
       <FlatList
         data={items}
