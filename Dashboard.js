@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, Button, View,   FlatList, Text } from 'react-native';
  import CardItem from './CardItem';
 const Dashboard = () => {
-  const [items, setItems] = useState([
+  const [items] = useState([
     { id: '1', heading: 'hearding 1', content: 'content 1', setHeading: (text) => handleTextChange('1', 'heading', text), setContent: (text) => handleTextChange('1', 'content', text) },
     // You can add more items initially if needed
   ]);
@@ -14,7 +14,12 @@ const Dashboard = () => {
             <CardItem key={item.id} item={item} />
             ))}
         </ScrollView>  */}
-         <FlatList
+        <Button
+            title="Add"
+            color="#f194ff"
+            onPress={() => Alert.alert('Button with adjusted color pressed')}
+        />         
+        <FlatList
             data={items}
             renderItem={({item}) => <CardItem key={item.id} item={item} />}
             keyExtractor={item => item.id}
