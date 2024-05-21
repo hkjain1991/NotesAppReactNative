@@ -1,29 +1,48 @@
-import React, { useState } from 'react';
-import { SafeAreaView, ScrollView, StyleSheet, Button, View,   FlatList, Text } from 'react-native';
- import CardItem from './CardItem';
-const Dashboard = () => {
+import React, {useState} from 'react';
+import {
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Button,
+  View,
+  FlatList,
+  Text,
+  Alert,
+} from 'react-native';
+import CardItem from './CardItem';
+const Dashboard = ({navigation}) => {
   const [items] = useState([
-    { id: '1', heading: 'hearding 1', content: 'content 1', setHeading: (text) => handleTextChange('1', 'heading', text), setContent: (text) => handleTextChange('1', 'content', text) },
+    {
+      id: '1',
+      heading: 'hearding 1',
+      content: 'content 1',
+    },
     // You can add more items initially if needed
   ]);
 
   return (
-    <SafeAreaView style={styles.container}>    
-        {/* <ScrollView contentContainerStyle={styles.scrollView}> 
+    <SafeAreaView style={styles.container}>
+      {/* <ScrollView contentContainerStyle={styles.scrollView}>
             {items.map((item) => (
             <CardItem key={item.id} item={item} />
             ))}
         </ScrollView>  */}
-        <Button
-            title="Add"
-            color="#f194ff"
-            onPress={() => Alert.alert('Button with adjusted color pressed')}
-        />         
-        <FlatList
-            data={items}
-            renderItem={({item}) => <CardItem key={item.id} item={item} />}
-            keyExtractor={item => item.id}
-        />
+      <Button
+        title="Add"
+        color="#f194ff"
+        onPress={() =>
+          navigation.navigate('NotesEdit', {
+            btnTitle: 'Save',
+            title: '',
+            descriptionInput: '',
+          })
+        }
+      />
+      <FlatList
+        data={items}
+        renderItem={({item}) => <CardItem key={item.id} item={item} />}
+        keyExtractor={item => item.id}
+      />
     </SafeAreaView>
   );
 };
