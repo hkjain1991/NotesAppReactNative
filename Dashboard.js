@@ -13,9 +13,9 @@ import CardItem from './CardItem';
 const Dashboard = ({navigation}) => {
   const [items,setItems] = useState([
     {
-      id: '1',
-      heading: 'hearding 1',
-      content: 'content 1',
+      id: '0',
+      heading: 'hearding 0',
+      content: 'content 0',
     },
     // You can add more items initially if needed
   ]);
@@ -27,7 +27,6 @@ const Dashboard = ({navigation}) => {
       content: content,
     }]
     setItems(newItems)
-    console.log("new item added",items)
   }
 
   return (

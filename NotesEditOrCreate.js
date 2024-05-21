@@ -1,15 +1,21 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {
   Button,
   SafeAreaView,
   TextInput,
   TouchableHighlight,
 } from 'react-native';
+
 import styles from './styles';
 
 const NotesEditOrCreate = ({navigation, route}) => {
   const [title,setTitle] = useState(route.params.title)
   const [content,setContent] = useState(route.params.descriptionInput)
+
+  const buttonAction = () =>{
+    console.log("buttonAction called")
+    route.params.callback(title,content)
+  } 
 
   return (
     <SafeAreaView>
@@ -27,15 +33,10 @@ const NotesEditOrCreate = ({navigation, route}) => {
         onChangeText={newText => setContent(newText)}
       />
       <TouchableHighlight style={styles.btn}>
-        <Button title={route.params.btnTitle} onPress={this.buttonAction} />
+        <Button title={route.params.btnTitle} onPress={ () => {buttonAction()} }  />
       </TouchableHighlight>
     </SafeAreaView>
   );
-  
-  const buttonAction = () =>{
-    console.log("buttonAction called")
-    route.params.callback(title,content)
-  } 
 };
 
 export default NotesEditOrCreate;
