@@ -33,7 +33,7 @@ const NotesEditOrCreate = ({navigation, route}) => {
         onChangeText={newText => setContent(newText)}
       />
       <TouchableHighlight style={styles.btn}>
-        <Button title={route.params.btnTitle} onPress={ () => {buttonAction()} }  />
+        <Button title={route.params.btnTitle} onPress={buttonAction} />
       </TouchableHighlight>
     </SafeAreaView>
   );
