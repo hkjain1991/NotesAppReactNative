@@ -1,7 +1,7 @@
 import React from 'react';
-import {View, TextInput, StyleSheet} from 'react-native';
+import {View, TextInput, StyleSheet, Button} from 'react-native';
 
-const CardItem = ({item}) => {
+const CardItem = ({item, navigation, callback}) => {
   return (
     <View style={styles.card}>
       <TextInput
@@ -16,6 +16,20 @@ const CardItem = ({item}) => {
         value={item.content}
         onChangeText={text => item.setContent(text)}
         multiline
+      />
+      <Button
+        title="Edit"
+        color="#f194ff"
+        onPress={() => {
+          console.log('from card', item.id);
+          navigation.navigate('NotesEdit', {
+            btnTitle: 'Edit',
+            title: item.heading,
+            descriptionInput: item.content,
+            callback: callback,
+            id: item.id,
+          });
+        }}
       />
     </View>
   );
