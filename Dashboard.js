@@ -11,14 +11,23 @@ import {
 } from 'react-native';
 import CardItem from './CardItem';
 const Dashboard = ({navigation}) => {
-  const [items] = useState([
+  const [items,setItems] = useState([
     {
-      id: '1',
-      heading: 'hearding 1',
-      content: 'content 1',
+      id: '0',
+      heading: 'hearding 0',
+      content: 'content 0',
     },
     // You can add more items initially if needed
   ]);
+
+  const addItem = (heading,content) => {
+    let newItems = [...items, {
+      id: items.length,
+      heading: heading,
+      content: content,
+    }]
+    setItems(newItems)
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -35,6 +44,7 @@ const Dashboard = ({navigation}) => {
             btnTitle: 'Save',
             title: '',
             descriptionInput: '',
+            callback : addItem
           })
         }
       />
