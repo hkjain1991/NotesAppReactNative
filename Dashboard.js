@@ -11,23 +11,39 @@ import {
 } from 'react-native';
 import CardItem from './CardItem';
 const Dashboard = ({navigation}) => {
-  const [items,setItems] = useState([
-    {
-      id: '0',
-      heading: 'hearding 0',
-      content: 'content 0',
-    },
-    // You can add more items initially if needed
-  ]);
+  const [items, setItems] = useState([]);
 
-  const addItem = (heading,content) => {
-    let newItems = [...items, {
-      id: items.length,
-      heading: heading,
-      content: content,
-    }]
-    setItems(newItems)
-  }
+  const addItem = (heading, content, id) => {
+    if (id === undefined) {
+      setItems(pre => {
+        let newItems = [
+          ...pre,
+          {
+            id: pre.length,
+            heading: heading,
+            content: content,
+          },
+        ];
+        return newItems;
+      });
+    } else {
+      setItems(pre => {
+        let items1 = [...pre];
+        items1[id] = {
+          id: id,
+          heading: heading,
+          content: content,
+        };
+        // items1.splice(id, 1);
+        // items1.splice(id, 0, {
+        //   id: id,
+        //   heading: heading,
+        //   content: content,
+        // });
+        return items1;
+      });
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -44,13 +60,20 @@ const Dashboard = ({navigation}) => {
             btnTitle: 'Save',
             title: '',
             descriptionInput: '',
-            callback : addItem
+            callback: addItem,
           })
         }
       />
       <FlatList
         data={items}
-        renderItem={({item}) => <CardItem key={item.id} item={item} />}
+        renderItem={({item}) => (
+          <CardItem
+            key={item.id}
+            item={item}
+            navigation={navigation}
+            callback={addItem}
+          />
+        )}
         keyExtractor={item => item.id}
       />
     </SafeAreaView>
