@@ -15,29 +15,28 @@ const Dashboard = ({navigation}) => {
 
   const addItem = (heading, content, id) => {
     if (id === undefined) {
-      let newItems = [
-        ...items,
-        {
-          id: items.length,
+      setItems(pre => {
+        let newItems = [
+          ...pre,
+          {
+            id: pre.length,
+            heading: heading,
+            content: content,
+          },
+        ];
+        return newItems;
+      });
+    } else {
+      setItems(pre => {
+        let items1 = [...pre];
+        items1.splice(id, 1);
+        items1.splice(id, 0, {
+          id: id,
           heading: heading,
           content: content,
-        },
-      ];
-      setItems(newItems);
-    } else {
-      // let passedId = parseInt(id, -1);
-      console.log('passed Id', id);
-      //if (passedId !== -1) {
-      console.log('items one', items);
-      let items1 = [...items];
-      items1.splice(id, 1);
-      items1.splice(id, 0, {
-        id: id,
-        heading: heading,
-        content: content,
+        });
+        return items1;
       });
-      setItems(items1);
-      console.log('items1 one', items1);
     }
   };
 

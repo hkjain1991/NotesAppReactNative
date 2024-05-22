@@ -15,6 +15,9 @@ const NotesEditOrCreate = ({navigation, route}) => {
   const buttonAction = () => {
     console.log('buttonAction called', route.params.id);
     route.params.callback(title, content, route.params.id);
+    if (route.params.id !== undefined) {
+      navigation.navigate('Dashboard');
+    }
   };
 
   return (
