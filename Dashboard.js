@@ -29,12 +29,17 @@ const Dashboard = ({navigation}) => {
     } else {
       setItems(pre => {
         let items1 = [...pre];
-        items1.splice(id, 1);
-        items1.splice(id, 0, {
+        items1[id] = {
           id: id,
           heading: heading,
           content: content,
-        });
+        };
+        // items1.splice(id, 1);
+        // items1.splice(id, 0, {
+        //   id: id,
+        //   heading: heading,
+        //   content: content,
+        // });
         return items1;
       });
     }
