@@ -1,20 +1,25 @@
 import React from 'react';
-import {View, TextInput, StyleSheet, Button, TouchableOpacity, Text} from 'react-native';
+import {
+  View,
+  TextInput,
+  StyleSheet,
+  Button,
+  TouchableOpacity,
+  Text,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const IconButton = ({ onPress, iconName }) => (
+const IconButton = ({onPress, iconName}) => (
   <TouchableOpacity onPress={onPress} style={styles.deleteButton}>
-   <Icon name= {iconName} size={30} color="black" />
+    <Icon name={iconName} size={30} color="black" />
   </TouchableOpacity>
 );
 
-const CardItem = ({item, navigation, deleteCallback}) => {
+const CardItem = ({item, navigation, deleteCallback, callback}) => {
   return (
     <View style={styles.card}>
-      <IconButton 
-         onPress={deleteCallback}
-         iconName="trash"
-      /> 
+      <IconButton onPress={deleteCallback} iconName="trash" />
+
       <TextInput
         style={styles.heading}
         placeholder="Heading"
@@ -75,9 +80,9 @@ const styles = StyleSheet.create({
     padding: 0,
     backgroundColor: 'blue',
   },
-  deleteButton : {
-    alignItems: 'flex-end'
-  }
+  deleteButton: {
+    alignItems: 'flex-end',
+  },
 });
 
 export default CardItem;

@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {
+  Alert,
   Button,
   SafeAreaView,
   TextInput,
@@ -16,8 +17,11 @@ const NotesEditOrCreate = ({navigation, route}) => {
     console.log('buttonAction called', route.params.id);
     route.params.callback(title, content, route.params.id);
     if (route.params.id !== undefined) {
-      navigation.navigate('Dashboard');
+      Alert.alert('Your changes are saved');
+    } else {
+      Alert.alert('Your data is saved');
     }
+    navigation.navigate('Dashboard');
   };
 
   return (
