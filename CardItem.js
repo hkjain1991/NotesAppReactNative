@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {
   View,
   TextInput,
@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Text,
 } from 'react-native';
+import themeContext from './contexts/themeContext';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const IconButton = ({onPress, iconName}) => (
@@ -16,8 +17,10 @@ const IconButton = ({onPress, iconName}) => (
 );
 
 const CardItem = ({item, navigation, deleteCallback, callback}) => {
+  const [isDarkTheme, setTheme] = useContext(themeContext);
   return (
-    <View style={styles.card}>
+    <View
+      style={[styles.card, {backgroundColor: isDarkTheme ? 'white' : 'green'}]}>
       <IconButton onPress={deleteCallback} iconName="trash" />
 
       <TextInput

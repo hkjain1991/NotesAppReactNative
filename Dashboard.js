@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -10,8 +10,11 @@ import {
   Alert,
 } from 'react-native';
 import CardItem from './CardItem';
+import themeContext from './contexts/themeContext';
+import useItemsHook from './customHooks/useItemsHook';
 const Dashboard = ({navigation}) => {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useItemsHook([]);
+  const [isDarkTheme, setTheme] = useContext(themeContext);
 
   const addItem = (heading, content, id) => {
     if (id === undefined) {
@@ -51,7 +54,11 @@ const Dashboard = ({navigation}) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView
+      style={[
+        styles.container,
+        {backgroundColor: isDarkTheme ? 'red' : 'blue'},
+      ]}>
       {/* <ScrollView contentContainerStyle={styles.scrollView}>
             {items.map((item) => (
             <CardItem key={item.id} item={item} />
@@ -60,14 +67,15 @@ const Dashboard = ({navigation}) => {
       <Button
         title="Add"
         color="#f194ff"
-        onPress={() =>
+        onPress={() => {
+          setTheme(!isDarkTheme);
           navigation.navigate('NotesEdit', {
             btnTitle: 'Save',
             title: '',
             descriptionInput: '',
             callback: addItem,
-          })
-        }
+          });
+        }}
       />
       <FlatList
         data={items}
